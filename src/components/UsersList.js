@@ -4,6 +4,8 @@ import ListItem from './ListItem';
 import ErrorComponent from './ErrorComponent';
 import fetchData from '../services/fetchData';
 import Divider from './Divider';
+import getFileName from '../services/parsingServices';
+import Loader from './Loader';
 
 const UsersList = () => {
   const [data, setData] = useState(null);
@@ -25,7 +27,7 @@ const UsersList = () => {
   };
 
   if (loading) {
-    return <Text>Loading</Text>;
+    return <Loader />;
   }
 
   if (!loading && !data) {
@@ -45,7 +47,10 @@ const UsersList = () => {
           onEndReached={fetchMore}
           onEndReachedThreshold={0.5}
           renderItem={({item}) => (
-            <ListItem avatar={item?.owner.avatar_url} fileName={item?.files} />
+            <ListItem
+              avatar={item?.owner.avatar_url}
+              fileName={getFileName(item?.files)}
+            />
           )}
           keyExtractor={(item, index) => item.id + index}
           initialNumToRender={30}
