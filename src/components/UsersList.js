@@ -3,21 +3,22 @@ import {View, Text, FlatList} from 'react-native';
 import ListItem from './ListItem';
 import ErrorComponent from './ErrorComponent';
 import fetchData from '../services/fetchData';
+import Divider from './Divider';
 
 const UsersList = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
+  let page = 1;
   useEffect(() => {
     setLoading(true);
     fetchData(page).then(result => {
       setData(result.data);
       setLoading(false);
     });
-  }, []);
+  }, [page]);
 
   const fetchMore = () => {
-    setPage(prevPage => prevPage + 1);
+    page = page + 1;
     fetchData(page).then(result =>
       setData(prevData => [...prevData, ...result.data]),
     );
@@ -31,8 +32,7 @@ const UsersList = () => {
     return <ErrorComponent description="No data." />;
   }
 
-  // eslint-disable-next-line no-extra-boolean-cast
-  if (!!data) {
+  if (data) {
     return (
       <View>
         <View style={{backgroundColor: '#c1c1c1'}}>
@@ -47,8 +47,9 @@ const UsersList = () => {
           renderItem={({item}) => (
             <ListItem avatar={item?.owner.avatar_url} fileName={item?.files} />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => item.id + index}
           initialNumToRender={30}
+          ItemSeparatorComponent={() => <Divider />}
         />
       </View>
     );
