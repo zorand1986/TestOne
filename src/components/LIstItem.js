@@ -1,13 +1,24 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import Avatar from './Avatar';
 
-const ListItem = () => {
-  const variable = 100;
+const ListItem = ({fileName, avatar}) => {
+  let parsedFileName;
+  function getFileName(obj) {
+    if (obj.filename) {
+      parsedFileName = obj.filename;
+    } else {
+      for (let key in obj) {
+        getFileName(obj[key]);
+      }
+    }
+  }
+  getFileName(fileName);
+  console.log({parsedFileName});
   return (
-    <View>
-      <Avatar />
-      <Text>This is list item</Text>
+    <View style={{flexDirection: 'row', height: 70, alignItems: 'center'}}>
+      <Image style={{width: 50, height: 50}} source={{uri: avatar}} />
+      <Text>{parsedFileName}</Text>
     </View>
   );
 };
