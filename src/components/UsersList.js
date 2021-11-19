@@ -13,7 +13,7 @@ const UsersList = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [imageUri, setImageUri] = useState(null);
-  const [showImage, setShowImage] = useState(false);
+
   let page = 1;
 
   useEffect(() => {
@@ -33,9 +33,8 @@ const UsersList = () => {
 
   const handleImageOverlay = item => {
     setImageUri(item?.owner.avatar_url);
-    setShowImage(true);
     setTimeout(() => {
-      setShowImage(false);
+      setImageUri(null);
     }, 1000);
   };
 
@@ -50,7 +49,7 @@ const UsersList = () => {
   if (data) {
     return (
       <>
-        {showImage && <OverlayImage uri={imageUri} />}
+        {imageUri && <OverlayImage uri={imageUri} />}
         <View>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Gists</Text>
