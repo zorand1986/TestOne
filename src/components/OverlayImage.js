@@ -35,13 +35,13 @@ const OverlayImage = ({uri}) => {
 
 const styles = StyleSheet.create({
   image: {
-    ...commonStyles.alignments.absolute,
-    top: height / 2 - IMAGE_HEIGHT / 2,
-    zIndex: 100,
     width,
     height: width,
   },
   imageContainer: {
+    ...commonStyles.alignments.absolute,
+    top: height / 2 - IMAGE_HEIGHT / 2,
+    zIndex: 200,
     elevation: 3,
   },
 });
