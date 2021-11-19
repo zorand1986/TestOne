@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -27,7 +27,9 @@ const OverlayImage = ({uri}) => {
   });
 
   return (
-    <Animated.Image source={{uri}} style={[styles.image, animationStyle]} />
+    <View style={styles.imageContainer}>
+      <Animated.Image source={{uri}} style={[styles.image, animationStyle]} />
+    </View>
   );
 };
 
@@ -38,6 +40,9 @@ const styles = StyleSheet.create({
     zIndex: 100,
     width,
     height: width,
+  },
+  imageContainer: {
+    elevation: 3,
   },
 });
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {
   AVATAR_SIZE,
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListItem;
+export default memo(ListItem);
