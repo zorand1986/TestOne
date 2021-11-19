@@ -1,21 +1,21 @@
 import React from 'react';
-import {View, ActivityIndicator, Dimensions} from 'react-native';
-
-const {width, height} = Dimensions.get('window');
+import {View, ActivityIndicator, StyleSheet} from 'react-native';
+import {COLORS, commonStyles} from '../styles';
 
 const Loader = () => {
   return (
-    <View
-      style={{
-        width,
-        height,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(255, 255, 255, .5)',
-      }}>
+    <View style={styles.container}>
       <ActivityIndicator />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    ...commonStyles.fullPage,
+    ...commonStyles.alignments.centerBasic,
+    backgroundColor: COLORS.backgroundPrimary,
+  },
+});
 
 export default Loader;

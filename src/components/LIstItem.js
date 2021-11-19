@@ -1,19 +1,35 @@
-import React, {useEffect} from 'react';
-import {View, Text, Image} from 'react-native';
+import React from 'react';
+import {View, Text, Image, StyleSheet} from 'react-native';
+import {
+  AVATAR_SIZE,
+  fonts,
+  LISTITEM_HEIGHT,
+  SIZES,
+  commonStyles,
+} from '../styles';
 
 const ListItem = ({fileName, avatar}) => {
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        height: 70,
-        alignItems: 'center',
-        marginHorizontal: 12,
-      }}>
-      <Image style={{width: 50, height: 50}} source={{uri: avatar}} />
-      <Text style={{marginLeft: 12}}>{fileName}</Text>
+    <View style={styles.container}>
+      <Image style={styles.avatar} source={{uri: avatar}} />
+      <Text style={styles.title}>{fileName}</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    ...commonStyles.alignments.row,
+    ...commonStyles.alignments.alignCenter,
+    height: LISTITEM_HEIGHT,
+    marginHorizontal: SIZES.m,
+  },
+  avatar: AVATAR_SIZE,
+  title: {
+    marginLeft: SIZES.xl,
+    fontSize: SIZES.l,
+    fontFamily: fonts.primary,
+  },
+});
 
 export default ListItem;

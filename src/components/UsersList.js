@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
 import ListItem from './ListItem';
 import ErrorComponent from './ErrorComponent';
 import fetchData from '../services/fetchData';
@@ -7,6 +7,7 @@ import Divider from './Divider';
 import getFileName from '../services/parsingServices';
 import Loader from './Loader';
 import OverlayImage from './OverlayImage';
+import {COLORS, fonts, fontWeight, SIZES} from '../styles';
 
 const UsersList = () => {
   const [data, setData] = useState(null);
@@ -51,10 +52,8 @@ const UsersList = () => {
       <>
         {showImage && <OverlayImage uri={imageUri} />}
         <View>
-          <View style={{backgroundColor: '#c1c1c1'}}>
-            <Text style={{color: 'black', fontSize: 20, fontWeight: '600'}}>
-              Gists
-            </Text>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Gists</Text>
           </View>
           <FlatList
             data={data}
@@ -77,5 +76,19 @@ const UsersList = () => {
     );
   }
 };
+
+const styles = StyleSheet.create({
+  titleContainer: {
+    backgroundColor: COLORS.backgroundSecondary,
+  },
+  title: {
+    fontSize: SIZES.l,
+    color: COLORS.textColor,
+    fontFamily: fonts.secondary,
+    fontWeight: fontWeight.bold,
+    marginVertical: SIZES.s,
+    marginHorizontal: SIZES.m,
+  },
+});
 
 export default UsersList;

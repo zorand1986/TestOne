@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
-import {Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
   withRepeat,
 } from 'react-native-reanimated';
-
-const {width, height} = Dimensions.get('window');
+import {commonStyles, width, height} from '../styles';
 
 const IMAGE_HEIGHT = width;
 
@@ -28,20 +27,18 @@ const OverlayImage = ({uri}) => {
   });
 
   return (
-    <Animated.Image
-      source={{uri}}
-      style={[
-        {
-          position: 'absolute',
-          top: height / 2 - IMAGE_HEIGHT / 2,
-          zIndex: 100,
-          width,
-          height: width,
-        },
-        animationStyle,
-      ]}
-    />
+    <Animated.Image source={{uri}} style={[styles.image, animationStyle]} />
   );
 };
+
+const styles = StyleSheet.create({
+  image: {
+    ...commonStyles.alignments.absolute,
+    top: height / 2 - IMAGE_HEIGHT / 2,
+    zIndex: 100,
+    width,
+    height: width,
+  },
+});
 
 export default OverlayImage;
