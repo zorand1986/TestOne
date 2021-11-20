@@ -35,7 +35,7 @@ const UsersList = () => {
     setImageUri(item?.owner.avatar_url);
     setTimeout(() => {
       setImageUri(null);
-    }, 1000);
+    }, 950);
   };
 
   if (loading) {
@@ -59,7 +59,9 @@ const UsersList = () => {
             onEndReached={fetchMore}
             onEndReachedThreshold={0.5}
             renderItem={({item}) => (
-              <TouchableOpacity onPress={() => handleImageOverlay(item)}>
+              <TouchableOpacity
+                disabled={imageUri}
+                onPress={() => handleImageOverlay(item)}>
                 <ListItem
                   avatar={item?.owner.avatar_url}
                   fileName={getFileName(item?.files)}
