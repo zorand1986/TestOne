@@ -1,13 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import ListItem from './ListItem';
 import ErrorComponent from './ErrorComponent';
 import fetchData from '../services/fetchData';
 import Divider from './Divider';
 import Loader from './Loader';
 import OverlayImage from './OverlayImage';
-import {COLORS, fonts, fontWeight, SIZES} from '../styles';
-import {filterData} from '../services/parsingServices';
+import { COLORS, fonts, fontWeight, SIZES } from '../styles';
+import { filterData } from '../services/parsingServices';
 
 const UsersList = () => {
   const [data, setData] = useState(null);
@@ -58,7 +64,7 @@ const UsersList = () => {
             data={data}
             onEndReached={fetchMore}
             onEndReachedThreshold={0.5}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <TouchableOpacity
                 disabled={imageUri}
                 onPress={() => handleImageOverlay(item)}>
