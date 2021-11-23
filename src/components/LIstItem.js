@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import FastImage from 'react-native-fast-image';
+import { View, Text, StyleSheet } from 'react-native';
 import {
   AVATAR_SIZE,
   fonts,
@@ -11,7 +12,11 @@ import {
 const ListItem = ({ fileName, avatar }) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.avatar} source={{ uri: avatar }} />
+      <FastImage
+        style={styles.avatar}
+        source={{ uri: avatar, priority: FastImage.priority.normal }}
+        resizeMode={FastImage.resizeMode.contain}
+      />
       <Text style={styles.title}>{fileName}</Text>
     </View>
   );
@@ -22,10 +27,11 @@ const styles = StyleSheet.create({
     ...commonStyles.alignments.row,
     ...commonStyles.alignments.alignCenter,
     height: LISTITEM_HEIGHT,
-    marginHorizontal: SIZES.m,
+    paddingHorizontal: SIZES.m,
   },
   avatar: AVATAR_SIZE,
   title: {
+    flex: 1,
     marginLeft: SIZES.xl,
     fontSize: SIZES.l,
     fontFamily: fonts.primary,

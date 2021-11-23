@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import {
   View,
   Text,
@@ -44,6 +44,19 @@ const UsersList = () => {
     }, 1000);
   };
 
+  const renderItem = useCallback(
+    ({ item }) => (
+      <TouchableOpacity
+        // disabled={imageUri}
+        onPress={() => handleImageOverlay(item)}>
+        <ListItem avatar={item?.avatar} fileName={item?.fileName} />
+      </TouchableOpacity>
+    ),
+    [],
+  );
+
+  const keyExtractor = useCallback((item, index) => item.id + index, []);
+
   if (loading) {
     return <Loader />;
   }
@@ -63,15 +76,9 @@ const UsersList = () => {
           <FlatList
             data={data}
             onEndReached={fetchMore}
-            onEndReachedThreshold={0.5}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                disabled={imageUri}
-                onPress={() => handleImageOverlay(item)}>
-                <ListItem avatar={item?.avatar} fileName={item?.fileName} />
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item, index) => item.id + index}
+            onEndReachedThreshold={0.8}
+            renderItem={renderItem}
+            keyExtractor={keyExtractor}
             initialNumToRender={30}
             ItemSeparatorComponent={() => <Divider />}
           />
