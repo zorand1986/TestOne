@@ -1,8 +1,8 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {commonStyles, fonts, SIZES} from '../styles';
+import * as React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { commonStyles, fonts, SIZES } from '../styles';
 
-const ErrorComponent = ({description}) => {
+const ErrorComponent = ({ description }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.description}>{description}</Text>

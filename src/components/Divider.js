@@ -1,6 +1,6 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {COLORS, DIVIDER_HEIGHT} from '../styles';
+import * as React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { COLORS, DIVIDER_HEIGHT } from '../styles';
 
 const Divider = () => {
   return <View style={styles.divider} />;

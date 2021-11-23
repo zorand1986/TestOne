@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_ENDPOINT} from '@env';
+import { API_ENDPOINT } from '@env';
 
 const fetchData = (
   page = 1,

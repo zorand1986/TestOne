@@ -1,21 +1,21 @@
-import React, {useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
   withRepeat,
 } from 'react-native-reanimated';
-import {commonStyles, width, height} from '../styles';
+import { commonStyles, width, height } from '../styles';
 
 const IMAGE_HEIGHT = width;
 
-const OverlayImage = ({uri}) => {
+const OverlayImage = ({ uri }) => {
   const animation = useSharedValue(0);
   const animationStyle = useAnimatedStyle(() => {
     return {
       opacity: withRepeat(
-        withTiming(animation.value, {duration: 500}),
+        withTiming(animation.value, { duration: 500 }),
         2,
         true,
       ),
@@ -28,7 +28,7 @@ const OverlayImage = ({uri}) => {
 
   return (
     <View style={styles.imageContainer}>
-      <Animated.Image source={{uri}} style={[styles.image, animationStyle]} />
+      <Animated.Image source={{ uri }} style={[styles.image, animationStyle]} />
     </View>
   );
 };

@@ -1,5 +1,5 @@
-import React, {memo} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import React, { memo } from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import {
   AVATAR_SIZE,
   fonts,
@@ -8,10 +8,10 @@ import {
   commonStyles,
 } from '../styles';
 
-const ListItem = ({fileName, avatar}) => {
+const ListItem = ({ fileName, avatar }) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.avatar} source={{uri: avatar}} />
+      <Image style={styles.avatar} source={{ uri: avatar }} />
       <Text style={styles.title}>{fileName}</Text>
     </View>
   );
