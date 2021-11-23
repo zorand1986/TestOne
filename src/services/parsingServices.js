@@ -11,3 +11,13 @@ export default function getFileName(obj) {
   }
   return parsedFileName;
 }
+
+export const filterData = data => {
+  return data?.data?.map(item => {
+    return {
+      avatar: item?.owner?.avatar_url,
+      fileName: getFileName(item?.files),
+      id: item?.id,
+    };
+  });
+};

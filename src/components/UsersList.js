@@ -4,10 +4,10 @@ import ListItem from './ListItem';
 import ErrorComponent from './ErrorComponent';
 import fetchData from '../services/fetchData';
 import Divider from './Divider';
-import getFileName from '../services/parsingServices';
 import Loader from './Loader';
 import OverlayImage from './OverlayImage';
 import {COLORS, fonts, fontWeight, SIZES} from '../styles';
+import {filterData} from '../services/parsingServices';
 
 const UsersList = () => {
   const [data, setData] = useState(null);
@@ -19,7 +19,7 @@ const UsersList = () => {
   useEffect(() => {
     setLoading(true);
     fetchData(page).then(result => {
-      setData(result.data);
+      setData(filterData(result));
       setLoading(false);
     });
   }, [page]);
@@ -27,15 +27,15 @@ const UsersList = () => {
   const fetchMore = () => {
     page = page + 1;
     fetchData(page).then(result =>
-      setData(prevData => [...prevData, ...result.data]),
+      setData(prevData => [...prevData, ...filterData(result)]),
     );
   };
 
   const handleImageOverlay = item => {
-    setImageUri(item?.owner.avatar_url);
+    setImageUri(item?.avatar);
     setTimeout(() => {
       setImageUri(null);
-    }, 950);
+    }, 1000);
   };
 
   if (loading) {
@@ -62,10 +62,7 @@ const UsersList = () => {
               <TouchableOpacity
                 disabled={imageUri}
                 onPress={() => handleImageOverlay(item)}>
-                <ListItem
-                  avatar={item?.owner.avatar_url}
-                  fileName={getFileName(item?.files)}
-                />
+                <ListItem avatar={item?.avatar} fileName={item?.fileName} />
               </TouchableOpacity>
             )}
             keyExtractor={(item, index) => item.id + index}
