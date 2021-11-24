@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -9,6 +10,8 @@ import Animated, {
 import { commonStyles, width, height } from '../styles';
 
 const IMAGE_HEIGHT = width;
+
+const AnimatedImage = Animated.createAnimatedComponent(FastImage);
 
 const OverlayImage = ({ uri }) => {
   const animation = useSharedValue(0);
@@ -28,7 +31,7 @@ const OverlayImage = ({ uri }) => {
 
   return (
     <View style={styles.imageContainer}>
-      <Animated.Image source={{ uri }} style={[styles.image, animationStyle]} />
+      <AnimatedImage source={{ uri }} style={[styles.image, animationStyle]} />
     </View>
   );
 };
